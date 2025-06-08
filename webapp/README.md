@@ -6,3 +6,10 @@ Ao soltar o dedo ou cursor, a forma de onda é reproduzida e uma explicação ci
 O botão **Limpar** remove o desenho e permite recomeçar.
 
 Para testar basta abrir `index.html` em um navegador moderno com suporte a WebAudio, tanto em dispositivos móveis quanto em computadores pessoais.
+
+## Abrir no Windows
+
+1. Localize a pasta `webapp` no Explorador de Arquivos.
+2. Dê um duplo clique em `index.html` para abrir no navegador padrão.
+3. Se preferir, abra o navegador e use `Ctrl+O` para escolher o arquivo manualmente.
+
