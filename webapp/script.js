@@ -51,34 +51,46 @@ function playBuffer(buffer) {
     src.start();
 }
 
-canvas.addEventListener('pointerdown', e => {
+function getPos(evt) {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+    const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
+}
+
+function startDraw(e) {
+    e.preventDefault();
     drawing = true;
     points = [];
     ctx.beginPath();
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const { x, y } = getPos(e);
     ctx.moveTo(x, y);
     points.push({ x, y });
-});
+}
 
-canvas.addEventListener('pointermove', e => {
+function moveDraw(e) {
     if (!drawing) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    e.preventDefault();
+    const { x, y } = getPos(e);
     ctx.lineTo(x, y);
     ctx.stroke();
     points.push({ x, y });
-});
+}
 
-canvas.addEventListener('pointerup', () => {
+function endDraw() {
     drawing = false;
     if (points.length < 2) return;
     const buffer = drawToWave(points);
     playBuffer(buffer);
     info.textContent = `A forma desenhada foi interpretada como uma onda sonora de 1 segundo. O eixo x representa o tempo e o eixo y a amplitude entre -1 e 1. A onda é reproduzida a ${audioCtx.sampleRate} Hz.`;
-});
+}
+
+['pointerdown', 'mousedown', 'touchstart'].forEach(evt =>
+    canvas.addEventListener(evt, startDraw));
+['pointermove', 'mousemove', 'touchmove'].forEach(evt =>
+    canvas.addEventListener(evt, moveDraw));
+['pointerup', 'mouseup', 'touchend', 'touchcancel'].forEach(evt =>
+    canvas.addEventListener(evt, endDraw));
 
 clearBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
