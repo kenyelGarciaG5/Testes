@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 1rem;
+  background: #f4f4f4;
+}
+h1 {
+  text-align: center;
+}
+section {
+  margin-bottom: 2rem;
+}
+.article {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+.article img {
+  max-width: 100%;
+}
+.figure {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+.figure img {
+  width: 100px;
+  height: auto;
+  margin-right: 1rem;
+}
+.credit {
+  font-size: 0.8rem;
+  color: #555;
+}
